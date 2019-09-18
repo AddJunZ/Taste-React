@@ -10,6 +10,7 @@ class App extends Component {
       show: true,
     }
     this.handleToggle = this.handleToggle.bind(this);
+    this.b = this.b.bind(this);
   }
   render() {
     return (
@@ -17,7 +18,14 @@ class App extends Component {
         <CSSTransition
           in={this.state.show}
           classNames="hello"
-          timeout={2000}
+          timeout={3000}
+          //消失是空间消失
+          unmountOnExit
+          //触发函数的时间，实际上与css的过渡时间无关
+          onEntering={(el)=>{el.style.color = 'blue'}}
+          onEntered={()=>{this.a()}}
+          onExited={this.b}
+          appear={true}
         >
           <div>hello</div>
         </CSSTransition>
@@ -29,6 +37,12 @@ class App extends Component {
     this.setState((preState)=>({
       show:preState.show ? false : true
     }))
+  }
+  a(){
+    alert('show')
+  }
+  b(){
+    alert('hide')
   }
 }
 export default App;
