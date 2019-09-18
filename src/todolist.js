@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import 'antd/dist/antd.css';
 import { Input, Button, List } from 'antd';
+import store from './store'
 
 const data = [
   'Racing car sprays burning fuel into crowd.',
@@ -11,6 +12,9 @@ const data = [
 ];
 
 class TodoList extends Component {
+  constructor(props){
+    super(props)
+  }
   render() {
     return (
       <div style={{ marginTop: '10px' }}>
