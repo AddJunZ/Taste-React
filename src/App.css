@@ -3,14 +3,14 @@
 }
 .hello-enter-active ,.hello-appear-active{
   opacity: 1;
-  transition: opacity 3000ms;
+  transition: opacity 1000ms;
 }
 .hello-exit {
   opacity: 1;
 }
 .hello-exit-active {
   opacity: 0;
-  transition: opacity 3000ms;
+  transition: opacity 1000ms;
 }
 .hello-exit-done{
   opacity: 0;
