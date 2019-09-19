@@ -13,5 +13,3 @@ export const getDeleteItemAction = (index) => ({
   type:DELETE_TODO_ITEM,
   index:index
 })
-
-

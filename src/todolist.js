@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import store from './store'
 import { getInputChangeAction, getAddItemAction, getDeleteItemAction } from './store/actionCreator'
 import TodoListUI from './TodoListUI'
+import axios from 'axios'
 
 class TodoList extends Component {
   constructor(props) {
@@ -29,6 +30,11 @@ class TodoList extends Component {
       list={this.state.list}
     />
   }
+  // componentDidMount(){
+  //   axios.get('http://localhost:8081')
+  //   .then((res)=>{console.log(res)})
+  //   .catch(e=>console.log(e))
+  // }
   // 改变input
   handleChange(e) {
     const action = getInputChangeAction(e.target.value);
