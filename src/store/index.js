@@ -1,13 +1,13 @@
 import { createStore, applyMiddleware, compose } from 'redux'
-import thunk from 'redux-thunk';
 import reducer from './reducer'
+import createSagaMiddleware from 'redux-saga'
+import todoSagas from './sagas'
 
-//redux-devtools
+const sagaMiddleware = createSagaMiddleware()
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const enhancer = composeEnhancers(
-  applyMiddleware(thunk),
-);
+const enhancer = composeEnhancers(applyMiddleware(sagaMiddleware));
 
-//笔记本作为第一个参数，第二个参数是redux-devtools需要的
 const store = createStore(reducer, enhancer);
+sagaMiddleware.run(todoSagas)
 export default store;
