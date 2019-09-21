@@ -1,34 +1,47 @@
-import React, { Component, Fragment } from 'react'
+import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
+import {getDeleteListAction,getAddListAction,getChangeInputAction} from './store/createActions'
 
-class TodoList extends Component {
-  render() {
-    return (
-      <Fragment>
-        <input type="text" value={this.props.inputValue} onChange={this.props.handleInputChange}/>
-        <button>提交</button>
-        <ul>
-          <li>hello</li>
-        </ul>
-      </Fragment>
-    )
-  }
+const TodoList = (props) => {
+  const { inputValue, handleBtnClick, handleInputChange, list,handleListClick } = props;
+
+  return (
+    <Fragment>
+      <input type="text" value={inputValue} onChange={handleInputChange} />
+      <button onClick={handleBtnClick}>提交</button>
+      <ul>
+        {
+          list.map((item, index) => {
+            return (
+              <li onClick={()=>{handleListClick(index)}} key={index}>{item}</li>
+            )
+          })
+        }
+      </ul>
+    </Fragment>
+  )
 }
 
 //映射store到props
 const mapStateToProps = (state) => {
   return {
-    inputValue: state.inputValue
+    inputValue: state.inputValue,
+    list: state.list
   }
 }
 //store.dispatch 挂载到props上
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleInputChange(e){
-      const action = {
-        type:'change_input_value',
-        value:e.target.value
-      }
+    handleInputChange(e) {
+      const action = getChangeInputAction(e.target.value);
+      dispatch(action);
+    },
+    handleBtnClick() {
+      const action = getAddListAction();
+      dispatch(action);
+    },
+    handleListClick(index){
+      const action = getDeleteListAction(index);
       dispatch(action);
     }
   }
